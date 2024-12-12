@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Especial</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            text-align: center;
+            background-color: #202020;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-top: 10px;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 18px;
+            color: #ffffff;
+            margin: 20px;
+            line-height: 1.6;
+        }
+
+        .carousel {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 300px;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Estilo das setas */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .arrow.left {
+            left: 10px;
+        }
+
+        .arrow.right {
+            right: 10px;
+        }
+
+        #contador {
+            font-size: 22px;
+            color: #ffffff;
+            margin-top: 20px;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        #texto {
+            display: none;
+        }
+
+        #texto h2 {
+            font-size: 22px;
+            color: #e77373;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Gabriel e Kamile 💖</h1>
+
+    <!-- Carrossel de Imagens -->
+    <div class="carousel" id="carousel">
+        <div class="slides">
+            <div class="slide"><img src="foto1.jpg" alt="Foto especial 1"></div>
+            <div class="slide"><img src="foto2.jpg" alt="Foto especial 2"></div>
+            <div class="slide"><img src="foto3.jpg" alt="Foto especial 3"></div>
+            <div class="slide"><img src="foto4.jpg" alt="Foto especial 4"></div>
+            <div class="slide"><img src="foto5.jpg" alt="Foto especial 4"></div>
+        </div>
+        <!-- Setas -->
+        <div class="arrow left" onclick="showPrevSlide()">&#10094;</div>
+        <div class="arrow right" onclick="showNextSlide()">&#10095;</div>
+    </div>
+
+    <!-- Contador de tempo -->
+    <div id="contador"></div>
+
+    <!-- Texto de Pedido -->
+    <div id="texto">
+        <p>Desde que a gente começou a se conhecer, tudo ficou mais interessante. As conversas, os momentos juntos e até
+            os silêncios passaram a ter um significado diferente. Algo em você me chama atenção de uma forma que eu não
+            esperava. Sua visão de mundo, a maneira como você lida com as situações e a forma autêntica de ser, me fazem
+            ter ainda mais certeza do que eu quero. A cada dia, sinto como sua presença tem agregado à minha rotina,
+            trazendo mais leveza aos meus dias.</p>
+        <p>Tenho curtido muito o tempo que passamos juntos e, com o passar dos dias, vejo que nossa sintonia é algo
+            natural. Quanto mais te conheço, mais percebo que a nossa conexão tem um potencial real, e, a cada momento
+            juntos, fico mais convicto de que vale a pena seguir em frente. Por isso, queria saber:</p>
+        <h2>Você aceita namorar comigo?</h2>
+    </div>
+
+    <script>
+        // Script para fazer as imagens do carrossel passarem automaticamente
+        const slides = document.querySelector('.slides');
+        const slide = document.querySelectorAll('.slide');
+        let currentIndex = 0;
+
+        function showNextSlide() {
+            currentIndex = (currentIndex + 1) % slide.length;
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function showPrevSlide() {
+            currentIndex = (currentIndex - 1 + slide.length) % slide.length;
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        setInterval(showNextSlide, 5000);
+
+        // Função para calcular e exibir o contador de tempo
+        const primeiraData = new Date("2024-11-03T12:00:00");
+
+        function atualizarContador() {
+            const agora = new Date();
+            const diffTime = agora - primeiraData;
+
+            const dias = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diffTime % (1000 * 60)) / 1000);
+
+            document.getElementById("contador").innerText =
+                `Já se passaram ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos desde o nosso primeiro encontro.`;
+        }
+
+        setInterval(atualizarContador, 1000);
+
+        setTimeout(() => {
+            document.getElementById("texto").style.display = "block";
+        }, 2500);
+    </script>
+</body>
+
+</html>
